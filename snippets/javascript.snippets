@@ -1,0 +1,530 @@
+# Function
+snippet fun "function"
+	function ${1:function_name}(${2}) {
+		${0:${VISUAL}}
+	}
+# Asynchronous Function
+snippet asf "async function"
+	async function ${1:function_name}(${2}) {
+		${0:${VISUAL}}
+	}
+# Anonymous Function
+snippet anf "" w
+	function(${1}) {
+		${0:${VISUAL}}
+	}
+# Anonymous Function assigned to variable
+snippet vaf
+	const ${1:function_name} = function(${2}) {
+		${0:${VISUAL}}
+	};
+# Function assigned to variable
+snippet vf
+	const ${1:function_name} = function $1(${2}) {
+		${0:${VISUAL}}
+	};
+# Immediate function
+snippet (f
+	(function(${1}) {
+		${0:${VISUAL}}
+	}(${2}));
+# Minify safe iife
+snippet ;fe
+	;(function(${1}) {
+		${0:${VISUAL}}
+	}(${2}))
+# self-defining function
+snippet sdf
+	var ${1:function_name} = function (${2:argument}) {
+		${3}
+
+		$1 = function ($2) {
+			${0:${VISUAL}}
+		};
+	};
+# Flow control
+# if
+snippet if "if (condition) { ... }"
+	if (${1:true}) {
+		${0:${VISUAL}}
+	}
+# if ... else
+snippet ife "if (condition) { ... } else { ... }"
+	if (${1:true}) {
+		${0:${VISUAL}}
+	} else {
+		${2}
+	}
+# tertiary conditional
+snippet ter Ternary: `condition ? true : false`
+	$1 ? $2: $0
+# switch
+snippet switch
+	switch (${1:expression}) {
+		case '${3:case}':
+			${4}
+			break;
+		${0}
+		default:
+			${2}
+	}
+snippet case "case 'xyz': ... break"
+	case '${1:case}':
+		${0:${VISUAL}}
+		break;
+snippet try "try { ... } catch(e) { ... }"
+	try {
+		${0:${VISUAL}}
+	} catch (${1:e}) {
+		${2:/* handle error */}
+	}
+snippet tryf "try { ... } catch(e) { ... } finally { ... }"
+	try {
+		${0:${VISUAL}}
+	} catch (${1:e}) {
+		${2:/* handle error */}
+	} finally {
+		${3:/* be executed regardless of the try / catch result*/}
+	}
+# throw Error
+snippet terr
+	throw new Error('${1:error message}')
+# return
+snippet ret
+	return ${0:result};
+snippet for "for (...) {...}"
+	for (let ${1:i} = 0, ${2:len} = ${3:Things.length}; $1 < $2; $1++) {
+		${0:${VISUAL}}
+	}
+snippet forr "reversed for (...) {...}"
+	for (let ${2:i} = ${1:Things.length} - 1; $2 >= 0; $2--) {
+		${0:${VISUAL}}
+	}
+snippet wh "(condition) { ... }"
+	while (${1:true}) {
+		${0:${VISUAL}}
+	}
+snippet wht "(true) { ... }"
+	while (true) {
+		${0:${VISUAL}}
+	}
+snippet do "do { ... } while (condition)"
+	do {
+		${0:${VISUAL}}
+	} while ($1);
+# For in loop
+snippet fori
+	for (let ${1:prop} in ${2:object}) {
+		${0:$2[$1]}
+	}
+# Objects
+# Object Method
+snippet :f
+	${1:method_name}: function (${2:attribute}) {
+		${0:${VISUAL}}
+	},
+# hasOwnProperty
+snippet has
+	hasOwnProperty(${0})
+# singleton
+snippet sing
+	function ${1:Singleton} (${2:argument}) {
+		// the cached instance
+		var instance;
+
+		// rewrite the constructor
+		$1 = function $1($2) {
+			return instance;
+		};
+
+		// carry over the prototype properties
+		$1.prototype = this;
+
+		// the instance
+		instance = new $1();
+
+		// reset the constructor pointer
+		instance.constructor = $1;
+
+		${0}
+
+		return instance;
+	}
+# Crockford's object function
+snippet obj
+	function object(o) {
+		function F() {}
+		F.prototype = o;
+		return new F();
+	}
+# Define multiple properties
+snippet props
+	var ${1:my_object} = Object.defineProperties(
+		${2:new Object()},
+		{
+			${3:property} : {
+				get : function $1_$3_getter() {
+					// getter code
+				},
+				set : function $1_$3_setter(value) {
+					// setter code
+				},
+				value        : ${4:value},
+				writeable    : ${5:boolean},
+				enumerable   : ${6:boolean},
+				configurable : ${0:boolean}
+			}
+		}
+	);
+# Define single property
+snippet prop
+	Object.defineProperty(
+		${1:object},
+		'${2:property}',
+		{
+			get : function $1_$2_getter() {
+				// getter code
+			},
+			set : function $1_$2_setter(value) {
+				// setter code
+			},
+			value        : ${3:value},
+			writeable    : ${4:boolean},
+			enumerable   : ${5:boolean},
+			configurable : ${0:boolean}
+		}
+	);
+# Documentation
+# docstring
+snippet /**
+	/**
+	 * ${0:description}
+	 *
+	 */
+snippet @par
+	@param {${1:type}} ${2:name} - ${0:description}
+snippet @ret
+	@return {${1:type}} ${0:description}
+# JSON.parse
+snippet jsonp
+	JSON.parse(${0:jstr});
+# JSON.stringify
+snippet jsons
+	JSON.stringify(${0:object});
+# DOM selectors
+# Get elements
+snippet get
+	getElementsBy${1:TagName}('${0}')
+# Get element
+snippet gett
+	getElementBy${1:Id}('${0}')
+# Elements by class
+snippet by.
+	${1:document}.getElementsByClassName('${0:class}')
+# Element by ID
+snippet by#
+	${1:document}.getElementById('${0:element ID}')
+# Query selector
+snippet qs
+	${1:document}.querySelector('${0:CSS selector}')
+# Query selector all
+snippet qsa
+	${1:document}.querySelectorAll('${0:CSS selector}')
+# Debugging
+snippet de
+	debugger;
+snippet cl "console.log"
+	console.log(${0});
+snippet cd "console.debug"
+	console.debug(${0});
+snippet ce "console.error"
+	console.error(${0});
+snippet cw "console.warn"
+	console.warn(${0});
+snippet ci "console.info"
+	console.info(${0});
+snippet ct "console.trace"
+	console.trace(${0:label});
+snippet ctime "console.time ... console.timeEnd"
+	console.time("${1:label}");
+	${0:${VISUAL}}
+	console.timeEnd("$1");
+snippet ctimestamp "console.timeStamp"
+	console.timeStamp("${1:label}");
+snippet ca "console.assert"
+	console.assert(${1:expression}, ${0:obj});
+snippet cclear "console.clear"
+	console.clear();
+snippet cdir "console.dir"
+	console.dir(${0:obj});
+snippet cdirx "console.dirxml"
+	console.dirxml(${1:object});
+snippet cgroup "console.group"
+	console.group("${1:label}");
+	${0:${VISUAL}}
+	console.groupEnd();
+snippet cgroupc "console.groupCollapsed"
+	console.groupCollapsed("${1:label}");
+	${0:${VISUAL}}
+	console.groupEnd();
+snippet cprof "console.profile"
+	console.profile("${1:label}");
+	${0:${VISUAL}}
+	console.profileEnd();
+snippet ctable "console.table"
+	console.table(${1:"${2:value}"});
+snippet clstr "console.log stringified"
+	console.log(JSON.stringify(${0}, null, 2));
+# Misc
+snippet us
+	'use strict';
+# setTimeout function
+snippet timeout
+	setTimeout(function () {${0}}${2}, ${1:10});
+snippet const
+	const ${1} = ${0};
+snippet constn
+	const ${1} = new ${0};
+snippet let
+	let ${1} = ${0};
+snippet im "import xyz from 'xyz'"
+	import ${1} from '${2:$1}';
+snippet imas "import * as xyz from 'xyz'"
+	import * as ${1} from '${2:$1}';
+snippet imm "import { member } from 'xyz'"
+	import { ${1} } from '${2}';
+snippet cla
+	class ${1} {
+		${0:${VISUAL}}
+	}
+snippet clax
+	class ${1} extends ${2} {
+		${0:${VISUAL}}
+	}
+snippet clac
+	class ${1} {
+		constructor(${2}) {
+			${0:${VISUAL}}
+		}
+	}
+snippet foro "for (const prop of object}) { ... }"
+	for (const ${1:prop} of ${2:object}) {
+		${0:$1}
+	}
+snippet forl "for (let prop of object}) { ... }"
+	for (let ${1:prop} of ${2:object}) {
+		${0:$1}
+	}
+snippet fun*
+	function* ${1:function_name}(${2}) {
+		${0:${VISUAL}}
+	}
+snippet c=>
+	const ${1:function_name} = (${2}) => {
+		${0:${VISUAL}}
+	}
+snippet ca=>
+	const ${1:function_name} = async (${2}) => {
+		${0:${VISUAL}}
+	}
+snippet caf
+	const ${1:function_name} = (${2}) => {
+		${0:${VISUAL}}
+	}
+snippet casf
+	const ${1:function_name} = async (${2}) => {
+		${0:${VISUAL}}
+	}
+snippet =>
+	(${1}) => {
+		${0:${VISUAL}}
+	}
+snippet af "() =>"
+	(${1}) => ${0:${VISUAL}}
+snippet afb "() => {}"
+	(${1}) => {
+		${0:${VISUAL}}
+	}
+snippet sym
+	const ${1} = Symbol('${0}');
+snippet ed
+	export default ${0}
+snippet ${
+	\${${1}}${0}
+snippet as "async"
+	async ${0}
+snippet aw "await"
+	await ${0:${VISUAL}}
+
+# Meteor snippets
+snippet mth "Template.X.helpers({...})"
+	Template.${1:template_name}.helpers({
+		${2}
+	});
+snippet mhf "Template helper function"
+	${1:helper_name}(${2:params}) {
+		${3:code}
+	},
+snippet mte "Template.X.events({...})"
+	Template.${1:template_name}.events({
+    		${2}
+  	});
+snippet mef "Event action (ev, tmpl) { ... }"
+  	'${1}'(ev, tmpl) {
+    		ev.preventDefault();
+    		${2}
+  	},
+snippet mpub "Meteor publish definition"
+	Meteor.publish('${1}', function () {
+		${2}
+	});
+snippet msub "Meteor subscribe definition"
+	${1}.subscribe('${2}'${3});
+snippet mstartup
+	Meteor.startup(function () {
+		${1}
+	});
+snippet mrh "Blaze register helper global"
+	Template.registerHelper('${1}', (${2}) => {
+		${3}
+	});
+snippet mrd "Flow Route definition"
+	FlowRouter.route('${1}', {
+		name: '${2}',
+		action(params, query) {
+			'${3}'
+		},
+	});
+snippet mfrg "FlowRouter go"
+	FlowRouter.go('${1}');
+snippet mfrp "FlowRouter getParam"
+	FlowRouter.getParam('${1}');
+snippet mauto
+	Tracker.autorun((c) => {
+		${1}
+	});
+snippet misc
+	if (Meteor.isClient) {
+		${1}
+	}
+snippet miss
+	if (Meteor.isServer) {
+		${1}
+	}
+snippet mmt
+	Meteor.methods({
+		${1}
+	});
+snippet mcall
+	Meteor.call('${1}', (err) => {
+		if (isFull(err)) {
+			CommonAssistants.error(err);
+		} else {
+			${2}
+		}
+	});
+snippet mcallasync
+	Meteor.callAsync('${1}', ${2:params});
+snippet mcol
+	${1} = new Mongo.Collection('${2}');
+snippet mi18
+ 	i18n.__('${1}')
+snippet merr
+	throw new Meteor.Error('${1}');
+snippet monr
+	Template.${1}.onRendered(function() {
+		${2}
+	});
+snippet monc
+	Template.${1}.onCreated(function() {
+		${2}
+	});
+snippet mond
+	Template.${1}.onDestroyed(function() {
+		${2}
+	});
+snippet mig
+	import { ${1} } from '${2}';
+snippet mid
+	import { ${1} } from '/imports/api/definitions.js';
+snippet mic
+	import { ${1} } from '/imports/api/client/client-helpers.js';
+snippet mish
+	import { ${1} } from '/imports/api/server/server-helpers.js';
+snippet mich
+	import { ${1} } from '/imports/api/common/common-helpers.js';
+snippet mist
+	import { Store } from '/imports/api/client/redux.js';
+snippet miac
+	import { ${1} } from '/imports/api/client/actions.js';
+snippet mia
+	import { ${1} } from '/imports/api/client/client-assistants.js';
+snippet mis
+	import { ${1} } from '/imports/api/server/server-services.js';
+snippet midi
+	import { ${1} } from '/imports/api/client/client-dispatchers.js';
+snippet misr
+	import { getState } from '/imports/api/client/redux-store-reactive.js';
+snippet misub
+	import { ${1} } from '/imports/api/client/subscriptions.js';
+
+snippet ex
+	export ${1:default} ${2:bar}
+snippet ce
+	console.error(${1:obj})
+snippet cl
+	console.log('${1}',${1})
+snippet cls
+	console.log('${1}')
+
+# Coprporate
+snippet blaze "Blaze component"
+	/**
+	 * Component to ${1:component_name}
+	 * @module ui:${2:module_name}
+	 */
+	 
+	 /** 
+	 * props
+	 * @property {${3:param_type}}
+	 */
+	const props = () => Template.currentData();
+
+	/** 
+	* state
+	*/
+	const state = () => ({});
+
+	const helpers = {}
+	
+	const events = {}
+	
+	/**************** BLAZE TEMPLATE ******************/
+	Template.${4}.onCreated(() => {
+	    const _props = props();
+	    const _state = state();
+  	    Template.instance()['state'] = _state;
+  	    Template.instance()['props'] = _props;
+	});
+snippet ist "Instance state"
+	const _state = Template.instance().state;
+snippet ip "Instance props"
+	const _props = props();
+snippet ips "Instance props and state"
+	const _props = props();
+	const _state = Template.instance().state;
+snippet thf "Template helper function"
+	${1:func_name}(props, state) {},
+snippet comm "Empty comment for jsdoc"
+	/**
+	* ${1:comment}
+	*/
+snippet byl "Bytelab copyright header"
+	// Copyright (c) 2019-2023 Bytelab Solutions SL
+	// This source code is property of Bytelab Solutions SL
+	// Copy or redistribution is forbidden
+snippet uinfo "Author and date"
+	// __author__ = Sergi Cortés <sergi.cortes@nextmol.com>
+	// __date__ = Jul, 2023
+snippet commblaze "Blaze comment"
+	/**    BLAZE TEMPLATE    **/

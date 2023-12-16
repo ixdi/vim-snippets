@@ -1,0 +1,425 @@
+extends javascript
+
+# Meteor snippets
+snippet mth "Template.X.helpers({...})"
+	Template.${1:template_name}.helpers({
+		${2}
+	});
+snippet mhf "Template helper function"
+	${1:helper_name}(${2:params}) {
+		${3:code}
+	},
+snippet mte "Template.X.events({...})"
+	Template.${1:template_name}.events({
+    		${2}
+  	});
+snippet mef "Event action (ev, tmpl) { ... }"
+  	'${1}'(ev, tmpl) {
+    		ev.preventDefault();
+    		${2}
+  	},
+snippet mefd "Event action debounce"
+	'${1}': _.debounce((ev, tmpl) => {
+		ev.preventDefault();
+		${2}
+	}, App.Settings.limitEventTime, true),
+snippet mtauto "autorun((c) { ... })"
+	self.autorun((c) => {
+		${1}
+	});
+snippet mff "ES6 function definition"
+	self.${1} = (${2}) => {
+		${3}
+	};
+snippet mpub "Meteor publish definition"
+	Meteor.publish('${1}', function () {
+		${2}
+	});
+snippet msub "Meteor subscribe definition"
+	${1}.subscribe('${2}'${3});
+snippet mstartup
+	Meteor.startup(function () {
+		${1}
+	});
+snippet mrh "Blaze register helper global"
+	Template.registerHelper('${1}', (${2}) => {
+		${3}
+	});
+snippet mrd "Flow Route definition"
+	FlowRouter.route('${1}', {
+		name: '${2}',
+		action(params, query) {
+			'${3}'
+		},
+	});
+snippet mfrg "FlowRouter go"
+	FlowRouter.go('${1}');
+snippet mfrp "FlowRouter getParam"
+	FlowRouter.getParam('${1}');
+snippet msset "Meteor Session set"
+	Session.set('${2:key}', ${3:value})${1}
+snippet msget "Meteor Session get"
+	Session.get('${2:key}')${1}
+snippet mseq
+	Session.equals('${2:key}', ${3:value})${1}
+snippet mco
+	/**
+	* ${1}
+	*/
+snippet mauto
+	Tracker.autorun((c) => {
+		${1}
+	});
+snippet misc
+	if (Meteor.isClient) {
+		${1}
+	}
+snippet miss
+	if (Meteor.isServer) {
+		${1}
+	}
+snippet mmt
+	Meteor.methods({
+		${1}
+	});
+snippet mcall
+	Meteor.call('${1}', (err) => {
+		if (isFull(err)) {
+			CommonAssistants.error(err);
+		} else {
+			${2}
+		}
+	});
+snippet mcallb
+	CommonAssistants.setBusy(true);
+	Meteor.call('${1}', (err) => {
+		if (isFull(err)) {
+			CommonAssistants.error(err);
+		} else {
+			${2}
+		}
+		CommonAssistants.setBusy(false);
+	});
+snippet mcallc
+	Meteor.call('${1}', controlError);
+snippet mcol
+	${1} = new Mongo.Collection('${2}');
+snippet mi18
+ 	i18n.__('${1}')
+snippet merr
+	throw new Meteor.Error('${1}');
+snippet monr
+	Template.${1}.onRendered(function() {
+		const self = this;
+		${2}
+	});
+snippet monc
+	Template.${1}.onCreated(function() {
+		const self = this;
+		${2}
+	});
+snippet mond
+	Template.${1}.onDestroyed(function() {
+		const self = this;
+		${2}
+	});
+snippet mig
+	import { ${1} } from '${2}';
+snippet mid
+	import { ${1} } from '/imports/api/definitions.js';
+snippet mic
+	import { ${1} } from '/imports/api/client/client-helpers.js';
+snippet mish
+	import { ${1} } from '/imports/api/server/server-helpers.js';
+snippet mich
+	import { ${1} } from '/imports/api/common/common-helpers.js';
+snippet mist
+	import { Store } from '/imports/api/client/redux.js';
+snippet miac
+	import { ${1} } from '/imports/api/client/actions.js';
+snippet mia
+	import { ${1} } from '/imports/api/client/client-assistants.js';
+snippet mis
+	import { ${1} } from '/imports/api/server/server-services.js';
+snippet midi
+	import { ${1} } from '/imports/api/client/client-dispatchers.js';
+snippet misr
+	import { getState } from '/imports/api/client/redux-store-reactive.js';
+snippet misub
+	import { ${1} } from '/imports/api/client/subscriptions.js';
+
+# For of loop
+snippet forof
+	for (let ${1:s} of ${2:sequence}) {
+		${3}
+	}
+snippet ex
+	export ${1:default} ${2:bar}
+snippet ce
+	console.error(${1:obj})
+snippet cl
+	console.log(${1:obj})
+snippet cle
+	console.log(${1:obj},${2})
+snippet foreach
+	${1:array}.forEach((${2:item}) => {
+		${3}
+	})
+snippet forof
+	for (let ${1:elem} of ${2:obj}) {
+		${3}
+	}
+snippet for
+	for (let i = 0 i < ${1:length} i++) {
+		${2}
+	}
+snippet if
+	if (${1:condition}) {
+		${2}
+	}
+snippet ife
+	if (${1:condition}) {
+		${2}
+	} else {
+		${3}
+	}
+snippet ifei
+	if (${1:condition}) {
+		${2}
+	} else if (${3:condition}) {
+		${4}
+	}
+snippet mf
+	const ${1} = (${2}) => {
+		${3}
+	}
+snippet mfs
+	(${1}) => ${2}
+snippet promr
+	new Promise(resolve => {
+		${1}
+	});
+snippet prom
+	new Promise((resolve, reject) => {
+		${1}
+	});
+
+# Mocha testing
+snippet des "describe('thing', () => { ... })"
+	describe('${1:}', () => {
+		${0:${VISUAL}}
+	});
+snippet it "it('should do', () => { ... })"
+	it('${1:}', () => {
+		${0:${VISUAL}}
+	});
+snippet blaze "Blaze component"
+	/**
+	 * Component to ${1}
+	 * @module ui:${2}
+	 */
+	 /** 
+	 * props
+	 */
+	const props = () => Template.currentData();
+	
+	/** 
+	* state
+	*/
+	const state = () => ({});
+
+	const helpers = {}
+	
+	/**************** BLAZE TEMPLATE ******************/
+	Template.${3}.onCreated(() => {
+	  const _props = props();
+	  const _state = state();
+	  Template.instance()['props] = _props;
+	  Template.instance()['state'] = _state;
+	});
+snippet ist "Instance state"
+	const state = Template.instance()['state'];
+snippet ip "Instance props"
+	const props = Template.currentData();
+snippet ips "Instance props and state"
+	const props = Template.currentData();
+	const state = Template.instance()['state'];
+snippet thf "Template helper function"
+	/**
+	* @function ${1:func_name}
+	* @param {Object} props
+	* @param {Object} state
+	* @return {void}
+	*/
+	${1:func_name}(props, state) {},
+snippet comm "Empty comment for jsdoc"
+	/**
+	* ${1:comment}
+	*/
+snippet byl "Bytelab copyright header"
+	// Copyright (c) 2019-2023 Bytelab Solutions SL
+	// This source code is property of Bytelab Solutions SL
+	// Copy or redistribution is forbidden
+snippet uinfo "Author and date"
+	// __author__ = Sergi Cortés <sergi.cortes@nextmol.com>
+	// __date__ = Jan, 2023
+snippet commblaze "Blaze comment"
+	/**************** BLAZE TEMPLATE ******************/
+snippet tconst "ts const"
+	const ${1}: ${2:any} = ${3};
+	${0}
+snippet tlet "ts let"
+	let ${1}: ${2:any} = ${3};
+	${0}
+snippet tvar "ts var"
+	var ${1}: ${2:any} = ${3};
+	${0}
+snippet + "ts create field"
+	${1}: ${0:any}
+snippet #+ "ts create private field using #"
+	#${1}: ${0:any}
+snippet tpfi "ts create public field"
+	public ${1}: ${0:any}
+snippet tprfi "ts create private field"
+	private ${1}: ${0:any}
+snippet tprofi "ts create protected field"
+	protected ${1}: ${0:any}
+snippet int "interface"
+	interface ${1} {
+		${2}: ${3:any};
+		${0}
+	}
+snippet intx "interface extends"
+	interface ${1} extends ${2} {
+		${3}: ${4:any};
+		${0}
+	}
+snippet tfun "ts function"
+	function ${1}(${2}): ${3:any} {
+		${0}
+	}
+snippet tpmet "ts public method"
+	public ${1}(${2}): ${3:any} {
+		${0}
+	}
+snippet tpsmet "ts public static method"
+	public static ${1}(${2}): ${3:any} {
+		${0}
+	}
+snippet tprmet "ts private method"
+	private ${1}(${2}): ${3:any} {
+		${0}
+	}
+snippet tpromet "ts protected method"
+	protected ${1}(${2}): ${3:any} {
+		${0}
+	}
+snippet tcla "ts class"
+	class ${1} {
+		${2}
+		constructor(public ${3}: ${4: any}) {
+			${5}
+		}
+		${0}
+	}
+snippet tclax "ts class extends"
+	class ${1} extends ${2} {
+		${3}
+		constructor(public ${4}: ${5: any}) {
+			${6}
+		}
+		${0}
+	}
+snippet fdto "RequestDTO"
+	// Copyright (c) 2019-2023 Bytelab Solutions SL
+	// This source code is property of Bytelab Solutions SL
+	// Copy or redistribution is forbidden
+	import { z } from 'zod';
+	import Configuration from '../../../Shared/domain/Config';
+
+	export const ${1}RequestDTO = z
+	  .object({
+	    name: z.coerce.string().max(Configuration.get('schema.string_short')),
+	    description: z.coerce
+	      .string()
+	      .max(Configuration.get('schema.string_long'))
+	      .default('')
+	      .optional(),
+	  })
+	  .strict();
+snippet fappsrv "AppService"
+	// Copyright (c) 2019-2023 Bytelab Solutions SL
+	// This source code is property of Bytelab Solutions SL
+	// Copy or redistribution is forbidden
+	
+	import { IApplicationService } from '../../../../Shared/domain/interfaces/IApplicationService';
+	import { IEntityPrimitives } from '../../../../Shared/domain/interfaces/IEntityPrimitives';
+	import { handleError } from '../../../../Shared/domain/Error';
+	
+	/**
+	 * @class ${1}AppService
+	 * Description: 
+	 * Required: params
+	 * Returns: 
+	 * Events: Event.MolecularModeling.XXX
+	 */
+	export class ${1}AppService implements IApplicationService {
+	  constructor(
+	    readonly repository: IXXXRepository,
+	    readonly params: IEntityPrimitives,
+	  ) {}
+	
+	  async run(): Promise<void> {
+
+	  }
+	}
+snippet fcmdh "CommandHandler"
+	// Copyright (c) 2019-2023 Bytelab Solutions SL
+	// This source code is property of Bytelab Solutions SL
+	// Copy or redistribution is forbidden
+	
+	import { ICommandHandler } from '../../../../Shared/domain/interfaces/ICommandHandler';
+	import { validateAuthenticationCommandHandler } from '../../../Authentication/application/ValidateAuthentication/ValidateAuthenticationCommandHandler';
+	import { IEntityPrimitives } from '../../../../Shared/domain/interfaces/IEntityPrimitives';
+	import { handleError } from '../../../../Shared/domain/Error';
+	
+	export class ${1}CommandHandler implements ICommandHandler {
+	  private typeData: IEntityPrimitives;
+	
+	  constructor(
+	    readonly receivedParams: Object,
+	    readonly respository: IRepository,
+	  ) {
+	    this.validateReceivedData();
+	    this.typeData = this.dataBuilder();
+	  }
+	
+	  async handle(): Promise<void> {
+	    await this.checkOwner().catch(handleError);
+	    const typeAppService = new TypeAppService(this.respository, this.typeData);
+	    await typeAppService.run().catch(handleError);
+	  }
+	
+	  private dataBuilder(): IEntityPrimitives {
+	    return {
+	      ...this.receivedParams,
+	    };
+	  }
+	
+	  private async checkOwner() {
+	    const user_id = await validateAuthenticationCommandHandler.handle().catch(handleError);
+	    this.typeData.owner = user_id;
+	  }
+	
+	  private validateReceivedData() {
+	    try {
+	      ${1}RequestDTO.parse(this.receivedParams);
+	    } catch (err) {
+	      handleError(err);
+	    }
+	  }
+	}
+snippet ch
+	//========================
+	// COMMANDS
+	//========================
