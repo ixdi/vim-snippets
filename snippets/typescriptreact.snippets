@@ -4,12 +4,16 @@ extends typescript
 snippet rf
 	export default function() {
 		return (
-			${1:components}
+			<>
+				<${1:components} />
+			</>
 		)
 	}
 snippet rfa
 	export default async function() {
 		return (
-			${1:components}
+			<>
+				<${1:components} />
+			</>		
 		)
 	}
