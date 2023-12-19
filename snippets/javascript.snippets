@@ -8,40 +8,6 @@ snippet asf "async function"
 	async function ${1:function_name}(${2}) {
 		${0:${VISUAL}}
 	}
-# Anonymous Function
-snippet anf "" w
-	function(${1}) {
-		${0:${VISUAL}}
-	}
-# Anonymous Function assigned to variable
-snippet vaf
-	const ${1:function_name} = function(${2}) {
-		${0:${VISUAL}}
-	};
-# Function assigned to variable
-snippet vf
-	const ${1:function_name} = function $1(${2}) {
-		${0:${VISUAL}}
-	};
-# Immediate function
-snippet (f
-	(function(${1}) {
-		${0:${VISUAL}}
-	}(${2}));
-# Minify safe iife
-snippet ;fe
-	;(function(${1}) {
-		${0:${VISUAL}}
-	}(${2}))
-# self-defining function
-snippet sdf
-	var ${1:function_name} = function (${2:argument}) {
-		${3}
-
-		$1 = function ($2) {
-			${0:${VISUAL}}
-		};
-	};
 # Flow control
 # if
 snippet if "if (condition) { ... }"
@@ -126,74 +92,6 @@ snippet :f
 # hasOwnProperty
 snippet has
 	hasOwnProperty(${0})
-# singleton
-snippet sing
-	function ${1:Singleton} (${2:argument}) {
-		// the cached instance
-		var instance;
-
-		// rewrite the constructor
-		$1 = function $1($2) {
-			return instance;
-		};
-
-		// carry over the prototype properties
-		$1.prototype = this;
-
-		// the instance
-		instance = new $1();
-
-		// reset the constructor pointer
-		instance.constructor = $1;
-
-		${0}
-
-		return instance;
-	}
-# Crockford's object function
-snippet obj
-	function object(o) {
-		function F() {}
-		F.prototype = o;
-		return new F();
-	}
-# Define multiple properties
-snippet props
-	var ${1:my_object} = Object.defineProperties(
-		${2:new Object()},
-		{
-			${3:property} : {
-				get : function $1_$3_getter() {
-					// getter code
-				},
-				set : function $1_$3_setter(value) {
-					// setter code
-				},
-				value        : ${4:value},
-				writeable    : ${5:boolean},
-				enumerable   : ${6:boolean},
-				configurable : ${0:boolean}
-			}
-		}
-	);
-# Define single property
-snippet prop
-	Object.defineProperty(
-		${1:object},
-		'${2:property}',
-		{
-			get : function $1_$2_getter() {
-				// getter code
-			},
-			set : function $1_$2_setter(value) {
-				// setter code
-			},
-			value        : ${3:value},
-			writeable    : ${4:boolean},
-			enumerable   : ${5:boolean},
-			configurable : ${0:boolean}
-		}
-	);
 # Documentation
 # docstring
 snippet /**
@@ -213,16 +111,13 @@ snippet jsons
 	JSON.stringify(${0:object});
 # DOM selectors
 # Get elements
-snippet get
+snippet dby
 	getElementsBy${1:TagName}('${0}')
-# Get element
-snippet gett
-	getElementBy${1:Id}('${0}')
 # Elements by class
-snippet by.
+snippet dbyc
 	${1:document}.getElementsByClassName('${0:class}')
 # Element by ID
-snippet by#
+snippet dby#
 	${1:document}.getElementById('${0:element ID}')
 # Query selector
 snippet qs
@@ -335,148 +230,8 @@ snippet casf
 	const ${1:function_name} = async (${2}) => {
 		${0:${VISUAL}}
 	}
-snippet =>
-	(${1}) => {
-		${0:${VISUAL}}
-	}
-snippet af "() =>"
-	(${1}) => ${0:${VISUAL}}
-snippet afb "() => {}"
-	(${1}) => {
-		${0:${VISUAL}}
-	}
-snippet sym
-	const ${1} = Symbol('${0}');
 snippet ed
 	export default ${0}
-snippet ${
-	\${${1}}${0}
-snippet as "async"
-	async ${0}
-snippet aw "await"
-	await ${0:${VISUAL}}
-
-# Meteor snippets
-snippet mth "Template.X.helpers({...})"
-	Template.${1:template_name}.helpers({
-		${2}
-	});
-snippet mhf "Template helper function"
-	${1:helper_name}(${2:params}) {
-		${3:code}
-	},
-snippet mte "Template.X.events({...})"
-	Template.${1:template_name}.events({
-    		${2}
-  	});
-snippet mef "Event action (ev, tmpl) { ... }"
-  	'${1}'(ev, tmpl) {
-    		ev.preventDefault();
-    		${2}
-  	},
-snippet mpub "Meteor publish definition"
-	Meteor.publish('${1}', function () {
-		${2}
-	});
-snippet msub "Meteor subscribe definition"
-	${1}.subscribe('${2}'${3});
-snippet mstartup
-	Meteor.startup(function () {
-		${1}
-	});
-snippet mrh "Blaze register helper global"
-	Template.registerHelper('${1}', (${2}) => {
-		${3}
-	});
-snippet mrd "Flow Route definition"
-	FlowRouter.route('${1}', {
-		name: '${2}',
-		action(params, query) {
-			'${3}'
-		},
-	});
-snippet mfrg "FlowRouter go"
-	FlowRouter.go('${1}');
-snippet mfrp "FlowRouter getParam"
-	FlowRouter.getParam('${1}');
-snippet mauto
-	Tracker.autorun((c) => {
-		${1}
-	});
-snippet misc
-	if (Meteor.isClient) {
-		${1}
-	}
-snippet miss
-	if (Meteor.isServer) {
-		${1}
-	}
-snippet mmt
-	Meteor.methods({
-		${1}
-	});
-snippet mcall
-	Meteor.call('${1}', (err) => {
-		if (isFull(err)) {
-			CommonAssistants.error(err);
-		} else {
-			${2}
-		}
-	});
-snippet mcallasync
-	Meteor.callAsync('${1}', ${2:params});
-snippet mcol
-	${1} = new Mongo.Collection('${2}');
-snippet mi18
- 	i18n.__('${1}')
-snippet merr
-	throw new Meteor.Error('${1}');
-snippet monr
-	Template.${1}.onRendered(function() {
-		${2}
-	});
-snippet monc
-	Template.${1}.onCreated(function() {
-		${2}
-	});
-snippet mond
-	Template.${1}.onDestroyed(function() {
-		${2}
-	});
-snippet mig
-	import { ${1} } from '${2}';
-snippet mid
-	import { ${1} } from '/imports/api/definitions.js';
-snippet mic
-	import { ${1} } from '/imports/api/client/client-helpers.js';
-snippet mish
-	import { ${1} } from '/imports/api/server/server-helpers.js';
-snippet mich
-	import { ${1} } from '/imports/api/common/common-helpers.js';
-snippet mist
-	import { Store } from '/imports/api/client/redux.js';
-snippet miac
-	import { ${1} } from '/imports/api/client/actions.js';
-snippet mia
-	import { ${1} } from '/imports/api/client/client-assistants.js';
-snippet mis
-	import { ${1} } from '/imports/api/server/server-services.js';
-snippet midi
-	import { ${1} } from '/imports/api/client/client-dispatchers.js';
-snippet misr
-	import { getState } from '/imports/api/client/redux-store-reactive.js';
-snippet misub
-	import { ${1} } from '/imports/api/client/subscriptions.js';
-
-snippet ex
-	export ${1:default} ${2:bar}
-snippet ce
-	console.error(${1:obj})
-snippet cl
-	console.log('${1}',${1})
-snippet cls
-	console.log('${1}')
-
 # Coprporate
 snippet blaze "Blaze component"
 	/**
@@ -506,19 +261,6 @@ snippet blaze "Blaze component"
   	    Template.instance()['state'] = _state;
   	    Template.instance()['props'] = _props;
 	});
-snippet ist "Instance state"
-	const _state = Template.instance().state;
-snippet ip "Instance props"
-	const _props = props();
-snippet ips "Instance props and state"
-	const _props = props();
-	const _state = Template.instance().state;
-snippet thf "Template helper function"
-	${1:func_name}(props, state) {},
-snippet comm "Empty comment for jsdoc"
-	/**
-	* ${1:comment}
-	*/
 snippet byl "Bytelab copyright header"
 	// Copyright (c) 2019-2023 Bytelab Solutions SL
 	// This source code is property of Bytelab Solutions SL
