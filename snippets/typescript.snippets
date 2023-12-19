@@ -1,54 +1,5 @@
 extends javascript
 
-snippet ex
-	export ${1:default} ${2:bar}
-snippet ce
-	console.error(${1:obj})
-snippet cl
-	console.log(${1:obj})
-snippet cle
-	console.log(${1:obj},${2})
-snippet foreach
-	${1:array}.forEach((${2:item}) => {
-		${3}
-	})
-snippet forof
-	for (let ${1:elem} of ${2:obj}) {
-		${3}
-	}
-snippet for
-	for (let i = 0 i < ${1:length} i++) {
-		${2}
-	}
-snippet if
-	if (${1:condition}) {
-		${2}
-	}
-snippet ife
-	if (${1:condition}) {
-		${2}
-	} else {
-		${3}
-	}
-snippet ifei
-	if (${1:condition}) {
-		${2}
-	} else if (${3:condition}) {
-		${4}
-	}
-snippet func
-	const ${1} = (${2}) => {
-		${3}
-	}
-snippet promr
-	new Promise(resolve => {
-		${1}
-	});
-snippet prom
-	new Promise((resolve, reject) => {
-		${1}
-	});
-
 # Testing
 snippet des "describe('thing', () => { ... })"
 	describe('${1:}', () => {
@@ -58,17 +9,6 @@ snippet it "it('should do', () => { ... })"
 	it('${1:}', () => {
 		${0:${VISUAL}}
 	});
-snippet comm "Empty comment for jsdoc"
-	/**
-	* ${1:comment}
-	*/
-snippet byl "Bytelab copyright header"
-	// Copyright (c) 2019-2023 Bytelab Solutions SL
-	// This source code is property of Bytelab Solutions SL
-	// Copy or redistribution is forbidden
-snippet uinfo "Author and date"
-	// __author__ = Sergi Cortés <sergi.cortes@nextmol.com>
-	// __date__ = Jan, 2023
 snippet int "interface"
 	interface ${1} {
 		${2}: ${3:any};
