@@ -3,6 +3,12 @@ snippet fun "function"
 	function ${1:function_name}(${2}) {
 		${0:${VISUAL}}
 	}
+snippet fune "ES6 function"
+	(${1}) => ${2:method}
+snippet funer "ES6 function"
+	(${1}) => { 
+	  	${2:method} 
+	}
 # Asynchronous Function
 snippet asf "async function"
 	async function ${1:function_name}(${2}) {
@@ -62,29 +68,27 @@ snippet for "for (...) {...}"
 	for (let ${1:i} = 0, ${2:len} = ${3:Things.length}; $1 < $2; $1++) {
 		${0:${VISUAL}}
 	}
-snippet forr "reversed for (...) {...}"
-	for (let ${2:i} = ${1:Things.length} - 1; $2 >= 0; $2--) {
-		${0:${VISUAL}}
-	}
 snippet wh "(condition) { ... }"
 	while (${1:true}) {
-		${0:${VISUAL}}
-	}
-snippet wht "(true) { ... }"
-	while (true) {
 		${0:${VISUAL}}
 	}
 snippet do "do { ... } while (condition)"
 	do {
 		${0:${VISUAL}}
 	} while ($1);
-# For in loop
-snippet fori
+snippet forin
 	for (let ${1:prop} in ${2:object}) {
 		${0:$2[$1]}
 	}
+snippet forof "for (const prop of object}) { ... }"
+	for (const ${1:prop} of ${2:object}) {
+		${0:$1}
+	}
+snippet forl "for (let prop of object}) { ... }"
+	for (let ${1:prop} of ${2:object}) {
+		${0:$1}
+	}
 # Objects
-# Object Method
 snippet :f
 	${1:method_name}: function (${2:attribute}) {
 		${0:${VISUAL}}
@@ -176,12 +180,6 @@ snippet us
 # setTimeout function
 snippet timeout
 	setTimeout(function () {${0}}${2}, ${1:10});
-snippet const
-	const ${1} = ${0};
-snippet constn
-	const ${1} = new ${0};
-snippet let
-	let ${1} = ${0};
 snippet im "import xyz from 'xyz'"
 	import ${1} from '${2:$1}';
 snippet imas "import * as xyz from 'xyz'"
@@ -190,37 +188,15 @@ snippet imm "import { member } from 'xyz'"
 	import { ${1} } from '${2}';
 snippet cla
 	class ${1} {
-		${0:${VISUAL}}
-	}
-snippet clax
-	class ${1} extends ${2} {
-		${0:${VISUAL}}
-	}
-snippet clac
-	class ${1} {
 		constructor(${2}) {
 			${0:${VISUAL}}
 		}
 	}
-snippet foro "for (const prop of object}) { ... }"
-	for (const ${1:prop} of ${2:object}) {
-		${0:$1}
-	}
-snippet forl "for (let prop of object}) { ... }"
-	for (let ${1:prop} of ${2:object}) {
-		${0:$1}
-	}
-snippet fun*
-	function* ${1:function_name}(${2}) {
-		${0:${VISUAL}}
-	}
-snippet c=>
-	const ${1:function_name} = (${2}) => {
-		${0:${VISUAL}}
-	}
-snippet ca=>
-	const ${1:function_name} = async (${2}) => {
-		${0:${VISUAL}}
+snippet clax
+	class ${1} extends ${2} {
+		constructor(${3}) {
+			${0:${VISUAL}}
+		}
 	}
 snippet caf
 	const ${1:function_name} = (${2}) => {
